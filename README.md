@@ -1,5 +1,6 @@
 # AiClubRecruitment
 How missing data and anomalies were handled.
+
 MISSING DATA:
 To fix this, I used a simple method called forward fill — this means if a value is missing at some hour, I just copy the value from the previous hour
 If there were any gaps at the very beginning of the dataset where forward fill couldn't work (nothing before it to copy from), I used backward fill which looks ahead instead.This approach made sense for electricity data because demand doesn't suddenly jump or disappear it changes gradually, so the nearest known value is a reasonable estimate for a short gap.
@@ -14,6 +15,7 @@ Mean is affected by the outliers,if the one of the value is too large the mean v
 
 Which temporal and external features were engineered
 and why.
+
 CALENDAR FEATURES:
 The machine learning model I used (Random Forest) has no built-in understanding of time. It sees each row as just a set of numbers with no connection to the rows before or after it. So I had to manually create features that tell the model what point in time each row represents.
 So it has hours of day, day of week,month
@@ -31,7 +33,9 @@ Temperature and humidity directly affect how much electricity people use. I merg
 ECONOMIC FEATURES:
 I included annual macroeconomic indicators like GDP and population.Since this data is annual, I joined it to the hourly data by year, meaning every hour in 2024 gets the same 2024 GDP value.
 
+
 Key insights from feature importance.
+
 Generation_mw is the most important feature with an importance score of 0.945 out of 1.The amout of electricity being generated at any hour is almost equal to demand at that hour.
 
 lag_1 is the second most important with a score of 0.022.Most recent hour demand is very likely to be close to the present one.This is the strongest time based feature.
